@@ -96,8 +96,8 @@ public class HomeFragment extends Fragment {
 
         list = view.findViewById(R.id.list);
         filterImage = view.findViewById(R.id.filterImage);
-        minPrice = view.findViewById(R.id.minPricetextField);
-        maxPrice = view.findViewById(R.id.maxPricetextField);
+//        minPrice = view.findViewById(R.id.minPricetextField);
+        //maxPrice = view.findViewById(R.id.maxPricetextField);
         setPriceLayout = view.findViewById(R.id.minMax);
         includeLayout = view.findViewById(R.id.include);
         priceGoBtn = view.findViewById(R.id.priceGoBtn);

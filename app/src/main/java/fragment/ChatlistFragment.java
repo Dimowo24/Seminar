@@ -31,7 +31,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.onaopemipodimowo.O4Homes.Chat;
 import com.onaopemipodimowo.O4Homes.Model.User;
-import com.onaopemipodimowo.O4Homes.Notifications.Token;
+//import com.onaopemipodimowo.O4Homes.Notifications.Token;
 import com.onaopemipodimowo.O4Homes.R;
 import com.onaopemipodimowo.O4Homes.UserAdapter;
 
@@ -84,17 +84,17 @@ public class ChatlistFragment extends Fragment {
 
             }
         });
-        updateToken(FirebaseInstanceId.getInstance().getToken());
+        //updateToken(FirebaseInstanceId.getInstance().getToken());
 
 
         return view;
     }
 
-    private void updateToken(String token){
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Token");
-        Token token1 = new Token(token);
-        reference.child(firebaseUser.getUid()).setValue(token1);
-    }
+//    private void updateToken(String token){
+//        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Token");
+//        Token token1 = new Token(token);
+//        reference.child(firebaseUser.getUid()).setValue(token1);
+//    }
 
     private void readChats(){
         mUsers = new ArrayList<>();

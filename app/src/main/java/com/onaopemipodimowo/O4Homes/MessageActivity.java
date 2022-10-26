@@ -28,11 +28,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.onaopemipodimowo.O4Homes.Model.User;
-import com.onaopemipodimowo.O4Homes.Notifications.Client;
-import com.onaopemipodimowo.O4Homes.Notifications.Data;
-import com.onaopemipodimowo.O4Homes.Notifications.MyResponse;
-import com.onaopemipodimowo.O4Homes.Notifications.Sender;
-import com.onaopemipodimowo.O4Homes.Notifications.Token;
+//import com.onaopemipodimowo.O4Homes.Notifications.Client;
+//import com.onaopemipodimowo.O4Homes.Notifications.Data;
+//import com.onaopemipodimowo.O4Homes.Notifications.MyResponse;
+//import com.onaopemipodimowo.O4Homes.Notifications.Sender;
+//import com.onaopemipodimowo.O4Homes.Notifications.Token;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -85,7 +85,7 @@ public class MessageActivity extends AppCompatActivity {
         backButton = findViewById(R.id.back_btn);
         textViewStatus = findViewById(R.id.status);
 
-        apiService = Client.getClient("https://fcm.googleapis.com/").create(APIService.class);
+        ///apiService = Client.getClient("https://fcm.googleapis.com/").create(APIService.class);
 
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
@@ -200,7 +200,7 @@ public class MessageActivity extends AppCompatActivity {
                 User user = dataSnapshot.getValue(User.class);
                 Log.i("fcm","notify");
                 if (notify) {
-                    sendNotification(receiver, user.getUsername(), msg);
+                    //sendNotification(receiver, user.getUsername(), msg);
                     Log.i("fcm", "sent notification");
                 }
                 notify = false;
@@ -212,47 +212,47 @@ public class MessageActivity extends AppCompatActivity {
             }
         });
     }
-
-    private void sendNotification(String receiver, final String username,final String message){
-        Log.i("fcm","srart sending");
-        DatabaseReference tokens = FirebaseDatabase.getInstance().getReference("Token");
-        Query query = tokens.orderByKey().equalTo(receiver);
-        query.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    Log.i("fcm","snapshot");
-                    Token token = snapshot.getValue(Token.class);
-                    Log.i("op","userid: "+userid+"fuser: "+firebaseUser.getUid());
-                    Data data = new Data(firebaseUser.getUid(), R.mipmap.ic_launcher,username+": "+message, "New Message",
-                            userid);
-                    Sender sender = new Sender(data,token.getToken());
-                    Log.i("fcm","about to send notification");
-                    apiService.sendNotification(sender)
-                            .enqueue(new Callback<MyResponse>() {
-                                @Override
-                                public void onResponse(Call<MyResponse> call, Response<MyResponse> response) {
-                                    if (response.code() == 200){
-                                        if (response.body().success !=1){
-                                            Toast.makeText(MessageActivity.this,"Failed!",Toast.LENGTH_SHORT).show();
-                                        }
-                                    }
-                                }
-
-                                @Override
-                                public void onFailure(Call<MyResponse> call, Throwable t) {
-
-                                }
-                            });
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
+//
+//    private void sendNotification(String receiver, final String username,final String message){
+//        Log.i("fcm","srart sending");
+//        DatabaseReference tokens = FirebaseDatabase.getInstance().getReference("Token");
+//        Query query = tokens.orderByKey().equalTo(receiver);
+//        query.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+//                    Log.i("fcm","snapshot");
+//                    Token token = snapshot.getValue(Token.class);
+//                    Log.i("op","userid: "+userid+"fuser: "+firebaseUser.getUid());
+//                    Data data = new Data(firebaseUser.getUid(), R.mipmap.ic_launcher,username+": "+message, "New Message",
+//                            userid);
+//                    Sender sender = new Sender(data,token.getToken());
+//                    Log.i("fcm","about to send notification");
+//                    apiService.sendNotification(sender)
+//                            .enqueue(new Callback<MyResponse>() {
+//                                @Override
+//                                public void onResponse(Call<MyResponse> call, Response<MyResponse> response) {
+//                                    if (response.code() == 200){
+//                                        if (response.body().success !=1){
+//                                            Toast.makeText(MessageActivity.this,"Failed!",Toast.LENGTH_SHORT).show();
+//                                        }
+//                                    }
+//                                }
+//
+//                                @Override
+//                                public void onFailure(Call<MyResponse> call, Throwable t) {
+//
+//                                }
+//                            });
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
+//    }
 
 
     private void readMessages(String myid, String userid, String imageurl) {
