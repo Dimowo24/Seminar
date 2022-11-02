@@ -118,8 +118,8 @@ public class MessageActivity extends AppCompatActivity {
             }
         });
 
-        if (userid == null) {
-            userid = getIntent().getStringExtra("userFullId");
+       // if (userid == null) {
+          //  userid = getIntent().getStringExtra("userFullId");
         }
 
         dbReference = FirebaseDatabase.getInstance().getReference("Users").child(userid);
